@@ -1,0 +1,50 @@
+{
+  "name": "group1-lib-a",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/group1/lib-a/src",
+  "prefix": "xx",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/group1/lib-a/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/group1/lib-a/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/group1/lib-a/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/group1/lib-a/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/group1/lib-a/**/*.ts",
+          "libs/group1/lib-a/**/*.html"
+        ]
+      }
+    }
+  }
+}
